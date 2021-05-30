@@ -1,17 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div id="logo-container">
+      <img alt="Vue logo" src="./assets/logo.png" style="max-width: 180px" />
+    </div>
+    <Memory />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Memory from "./components/Memory.vue";
+import "./style.css";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Memory,
+  },
+};
 </script>
 
 <style>
