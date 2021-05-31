@@ -6,7 +6,12 @@
     </div>
 
     <div class="cards-container">
-      <div class="cards" v-for="(num, x) in nums" :key="x">
+      <div
+        class="cards"
+        v-for="(num, x) in nums"
+        :key="x"
+        @click="() => this.selectCard(num)"
+      >
         <div
           :class="`card ${selectedCards.indexOf(num) >= 0 ? 'is-flipped' : ''}`"
         >
@@ -32,9 +37,11 @@ export default {
     };
   },
   methods: {
-    /* selectCard(val){
-      if(){}
-    } */
+    selectCard(val) {
+      if (this.selectedCards.indexOf(val) === -1) {
+        this.selectedCards.push(val);
+      }
+    },
   },
   async mounted() {
     this.selectedCards = this.nums;
