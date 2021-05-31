@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-lg-3 mx-auto">
         <div class="form-group">
-          <select class="form-control" @change="this.handleSelectSize($event)">
+          <select class="form-control" @change="this.getRandomNumbers">
             <option value=""></option>
             <option>4</option>
             <option>8</option>
@@ -31,34 +31,34 @@ import axios from "axios";
 
 export default {
   name: "Memory",
-  props: {
-    msg: String,
-  },
-  data: function () {
+  props: {},
+  data: () => {
     return {
-      randNumbers: null,
+      cardNums: null,
     };
   },
   components: {
     Cards,
   },
   methods: {
-    handleSelectSize: async (e) => {
-      console.log(e.target.value);
-
-      await this.getRandomNumbers(Number(e.target.value));
-    },
-    getRandomNumbers: async (size) => {
+    getRandomNumbers: async (e) => {
       const randNumbers = await axios.post(
         "http://127.0.0.1:3002/api/memory/getRandomNumbers",
         {
-          size,
+          size: Number(e.target.value),
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
         }
       );
 
-      console.log("randNumbers: ", randNumbers);
+      console.log(randNumbers.data.data);
 
-      if (randNumbers) this.randNumbers = randNumbers;
+      if (randNumbers) this.$data.cardNums = randNumbers.data.data; // this.$set(this.cardNums, randNumbers.data.data);
+
+      console.log("cardNums: ", this.cardNums);
     },
   },
 };
