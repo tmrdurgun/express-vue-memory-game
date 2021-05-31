@@ -7,11 +7,13 @@
 
     <div class="cards-container">
       <div class="cards" v-for="(num, x) in nums" :key="x">
-        <div class="card">
-          <div class="card__face card__face--front">
+        <div
+          :class="`card ${selectedCards.indexOf(num) >= 0 ? 'is-flipped' : ''}`"
+        >
+          <div class="card__face card__face--front"></div>
+          <div class="card__face card__face--back">
             <span>{{ num }}</span>
           </div>
-          <div class="card__face card__face--back">back</div>
         </div>
       </div>
     </div>
@@ -24,8 +26,23 @@ import "./style.css";
 export default {
   name: "Cards",
   props: ["nums"],
+  data() {
+    return {
+      selectedCards: [],
+    };
+  },
+  methods: {
+    /* selectCard(val){
+      if(){}
+    } */
+  },
   async mounted() {
-    console.log("nums: ", this.nums);
+    this.selectedCards = this.nums;
+    console.log("selectedCards: ", this.selectedCards);
+
+    setTimeout(() => {
+      this.selectedCards = [];
+    }, 5000);
   },
 };
 </script>

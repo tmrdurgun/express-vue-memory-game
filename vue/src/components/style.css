@@ -44,7 +44,9 @@
   }
   
   .card__face--back {
-    background: blue;
+    background: url('../assets/back.png');
+    background-size: 200%;
+    background-position: 5% 37%;
     transform: rotateY(180deg);
   }
   
